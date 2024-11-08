@@ -20,6 +20,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
@@ -78,6 +80,31 @@ public class UsuarioServicio implements UserDetailsService {
             return user;
         }else{
             return null;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepositorio.findAll();
+    }
+
+    @Transactional
+    public void cambiarRol(UUID id) throws MiException {
+        Optional<Usuario> usuario = usuarioRepositorio.findById(id);
+
+        if(usuario.isPresent()){
+            Usuario user = usuario.get();
+
+            System.out.println("PRABANDO LOS DATOS: "+user.getRol().toString()+" "+user.getId());
+
+            if(user.getRol().equals(Rol.USER)){
+                user.setRol(Rol.ADMIN);
+            }else{
+                user.setRol(Rol.USER);
+            }
+            usuarioRepositorio.save(user);
+        }else{
+            throw new MiException("El usuario no existe");
         }
     }
 }
