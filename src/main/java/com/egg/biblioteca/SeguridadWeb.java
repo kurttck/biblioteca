@@ -3,19 +3,21 @@ package com.egg.biblioteca;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SeguridadWeb {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize.
-                requestMatchers("/admin/").hasRole("ADMIN").
+                requestMatchers("/admin/**").hasRole("ADMIN").
                 requestMatchers("/css/","/js/", "/img/", "/**")
                 .permitAll())
                 .formLogin((form)-> form
