@@ -17,8 +17,20 @@ public class Usuario {
     private String email;
     private String password;
 
+    @OneToOne
+    private Imagen imagen;
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
+
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
 
     public Usuario() {
     }

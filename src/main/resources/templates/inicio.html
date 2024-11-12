@@ -4,59 +4,7 @@
 <head th:replace="/fragments/head :: head"></head>
 
 <body>
-<nav class="navbar navbar-expand-lg navBar">
-  <div class="containerImg">
-    <a href="#" class="navbar-brand d-flex align-items-center">
-      <img class="logo" src="/img/Egg.png" alt="Img logo egg">
-    </a>
-  </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse elementosNav" id="navbarNavDropdown">
-    <ul class="navbar-nav ms-auto elementos">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Libros
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
-        </ul>
-      </li>
-
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Autores
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-          <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
-        </ul>
-      </li>
-
-
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Editoriales
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
-        </ul>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Perfil
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</nav>
+<nav th:replace="/fragments/navbar :: navbar"></nav>
 
 <header class="header">
   <section class="contenedorMain">
@@ -64,8 +12,8 @@
       <a class="navbar-brand" href="#">BIBLIOTECA EGG</a>
     </div>
     <div class="container contenedorLibros">
-      <p class="tituloLibros">Encontrá todos los Libros Aquí!</p>
       <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+      <img th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" class="logo" alt="img logo egg">
       <a class="btn btn-xl mt-2 boton">Ver Listado</a>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
